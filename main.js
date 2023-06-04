@@ -59,19 +59,63 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-let textSprite;
-const fontLoader = new FontLoader();
-fontLoader.load('public/font.json', function (font) {
-  // Font loading complete
 
-  for (let i = 0; i < 200; i++) {
+function generateTextTexture(text, size) {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+
+    const fontSize = size; // Text size
+    const fontFamily = 'Arial'; // Font family
+  
+    context.font = `${fontSize}px ${fontFamily}`;
+  
+    // Measure the text dimensions
+    const textMetrics = context.measureText(text);
+    const textWidth = Math.max(textMetrics.width, 100);
+    console.log(textMetrics.width);
+  
+    canvas.width = textWidth;
+    canvas.height = textWidth/2;
+  
+    context.font = `${fontSize}px ${fontFamily}`;
+    context.textBaseline = 'middle';
+    context.textAlign = 'center';
+  
+    // Set color and draw the text
+    context.fillStyle = 'white';
+    context.fillText(text, canvas.width / 2, canvas.height / 2);
+  
+    // Create a texture from the canvas
+    const texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+  
+    return texture;
+  }
+
+
+for (let i = 0; i < 200; i++) {
     const distFactor = 80
     // Create material for the text
-    const textMaterial = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(generateTextCanvas('Hello, World!', 256, 128)) });
+    //const textMaterial = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(generateTextCanvas('Hello, World!a aaaaa', 40)) });
 
     // Create a sprite to hold the text material
-    textSprite = new THREE.Sprite(textMaterial);
-    textSprite.scale.set(16, 8, 8); // Adjust the scale of the sprite
+
+
+    const text = 'Hello';
+    const size = text.length;
+    const textSize = Math.max(size, 15);
+
+    const textTexture = generateTextTexture(text, textSize);
+
+    const textMaterial = new THREE.SpriteMaterial({ map: textTexture });
+    const textSprite = new THREE.Sprite(textMaterial);
+
+    const aspectRatio = textTexture.image.width / textTexture.image.height;
+    const textHeight = textSize;
+
+    textSprite.scale.set(textSize, textSize/2, 1);
+
+
 
     // Randomly position the text sprites in space
     textSprite.position.x = (Math.random() * 2 - 1) * distFactor;
@@ -84,11 +128,11 @@ fontLoader.load('public/font.json', function (font) {
     let color;
 
     if (y > 0) {
-      const intensity = y >= 1 ? y / distFactor : 1 / distFactor; // Adjust the value to control color intensity
-      textSprite.material.color.setRGB(1 - intensity, 1, 0); // Transition from yellow to light green
+        const intensity = y >= 1 ? y / distFactor : 1 / distFactor; // Adjust the value to control color intensity
+        textSprite.material.color.setRGB(1 - intensity, 1, 0); // Transition from yellow to light green
     } else if (y < 0) {
-      const intensity = y <= -1 ? Math.abs(y / distFactor) : 1 / distFactor; // Adjust the value to control color intensity
-      textSprite.material.color.setRGB(1, 1 - intensity, 0);// Red gradient
+        const intensity = y <= -1 ? Math.abs(y / distFactor) : 1 / distFactor; // Adjust the value to control color intensity
+        textSprite.material.color.setRGB(1, 1 - intensity, 0);// Red gradient
     } else {
         textSprite.material.color.setRGB(1, 1, 0); // Yellow color at y = 0
     }
@@ -105,8 +149,8 @@ fontLoader.load('public/font.json', function (font) {
     }
 
     scene.add(textSprite);
-  }
-});
+}
+
 
 // Create spheres
 // const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
@@ -144,49 +188,7 @@ fontLoader.load('public/font.json', function (font) {
 //     scene.add(sphere);
 // }
 
-function generateTextCanvas(text, width, height) {
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    
-    const context = canvas.getContext('2d');
-    context.font = 'Bold 40px Arial';
-    context.fillStyle = 'white';
-    context.textAlign = 'center';
-    context.fillText(text, width / 2, height / 2);
-    
-    return canvas;
-    }
-// let textSprite;
-// const fontLoader = new FontLoader();
-// fontLoader.load('public/font.json', function (font) {
-//     console.log('Font loaded:', font);
-//     // Create text geometry
-//     const textGeometry = new TextGeometry('Hello, World!', {
-//     font: font,
-//     size: 10, // Size of the text
-//     height: 0.1, // Depth of the text
-//     curveSegments: 12, // Number of points on the curves
-//     bevelEnabled: true,
-//     bevelThickness: 0.03, // Thickness of the bevel
-//     bevelSize: 0.02, // Size of the bevel
-//     bevelOffset: 0, // Distance from the text geometry to the bevel geometry
-//     bevelSegments: 5 // Number of bevel segments
-//     });
 
-//     // Create material for the text
-//     const textMaterial = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(generateTextCanvas('Hello, World!', 256, 128)) });
-
-//     // Create a sprite to hold the text material
-//     textSprite = new THREE.Sprite(textMaterial);
-//     textSprite.scale.set(16, 8, 8); // Adjust the scale of the sprite
-
-//     // Position the sprite
-//     textSprite.position.set(0, 0, 0); // Adjust the position as needed
-
-//     // Add the sprite to the scene
-//     scene.add(textSprite);
-// });
 
 
     
