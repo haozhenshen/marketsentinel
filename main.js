@@ -52,7 +52,7 @@ scene.add(particleSystem);
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.x = 0;
 camera.position.y = 0;
-camera.position.z = 60;
+camera.position.z = 200;
 
 // Create a renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -72,7 +72,6 @@ fontLoader.load('public/font.json', function (font) {
     // Create a sprite to hold the text material
     textSprite = new THREE.Sprite(textMaterial);
     textSprite.scale.set(16, 8, 8); // Adjust the scale of the sprite
-
 
     // Randomly position the text sprites in space
     textSprite.position.x = (Math.random() * 2 - 1) * distFactor;
