@@ -27,6 +27,6 @@
       "@/ui/*": ["./src/components/ui/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Marketverse/camera.jsx", "src/components/Marketverse/renderer.jsx", "src/components/Marketverse/textsprite.jsx", "src/components/Marketverse/pointlight.jsx", "src/components/Marketverse/particles.jsx", "src/components/Marketverse/eventhandler.jsx", "src/components/Marketverse/ambientlight.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Marketverse/camera.jsx", "src/components/Marketverse/renderer.jsx", "src/components/Marketverse/textsprite.jsx", "src/components/Marketverse/pointlight.jsx", "src/components/Marketverse/particles.jsx", "src/components/Marketverse/eventhandler.jsx", "src/components/Marketverse/ambientlight.jsx", "src/prisma/seed.jsx"],
   "exclude": ["node_modules"]
 }

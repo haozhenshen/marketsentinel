@@ -1,0 +1,44 @@
+// schema.prisma
+
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+    provider          = "postgresql"
+    url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
+    directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+    shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
+
+model Stock {
+    id     String @id @default(cuid())
+    name   String @unique
+    ticker String @unique
+    price  Float
+    relatednews  News[] 
+}
+
+model News {
+    id    String @id @default(cuid())
+    time  BigInt
+    headline String
+    summary String
+    shortSummary String
+    sentiment Float
+    source String
+    url   String
+    stock Stock? @relation(fields: [stockid], references: [id])
+    stockid String?
+
+}
+
+
+model User {
+    id    String  @id @default(cuid())
+    name  String?
+    email String? @unique
+
+    @@map(name: "users")
+}

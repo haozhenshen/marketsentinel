@@ -15,13 +15,15 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
-      <div className='container pb-80 max-w-7xl  mx-auto h-1/2'>
+    <div className='relative flex items-center justify-center overflow-x-hidden'>
+      <div className='container pb-80 max-w-7xl mx-auto h-1/2 mt-80'>
         
-        <div className='h-full gap-6 flex flex-col justify-start lg:justify-center items-center  '>
+        <div className='gap-6 flex flex-col justify-start lg:justify-center items-center  '>
           <LargeHeading
             size='lg'
-            className='three-d text-black dark:text-white'>
+            className='three-d text-black dark:text-white'
+            >
+              
             Visualize Market Sentiment in 3D: Uncover Insights, Make Informed Decisions
           </LargeHeading>
 
@@ -29,13 +31,12 @@ export default function Home() {
             With MarketView, you can visualize
             market sentiment at a glance.
           </Paragraph>
-          {/* <SearchBar placeholder="Enter a stock symbol ... eg. AAPL"/> */}
+          
+          <SearchBar placeholder="Enter a stock symbol ... eg. AAPL" />
          
         </div>
 
-        <div style={{ maxWidth: '500px' }} className=" justify-center mx-auto">
-          <SearchBar placeholder="Enter a stock symbol ... eg. AAPL" />
-        </div>
+       
       
       </div>
       
