@@ -11,7 +11,7 @@ import React, { FC, useEffect } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { useTheme } from 'next-themes';
-import { News } from '@prisma/client';
+import { Stock, News } from '@prisma/client';
 
 interface MarketverseProps {
   news:  Array<News>;
