@@ -7,15 +7,26 @@ import { createParticles } from './particles.jsx';
 import { createPointLight } from './pointlight.jsx';
 import { createAmbientLight } from './ambientlight.jsx';
 import { createTextSprite } from './textsprite.jsx';
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { useTheme } from 'next-themes';
+import { Stock, News } from '@prisma/client';
 
+interface MarketverseProps {
+  news:  Array<News>;
+}
 
-const Marketverse = () => {
+const Marketverse: FC<MarketverseProps> = ({news}) => {
+
+  const { theme } = useTheme();
+
   useEffect(() => {
     // Create a scene
     const scene = createScene()
+    if (theme === 'light') {
+      scene.background = new THREE.Color(0x555555);
+    }
 
     // Set up particle system
     const particleSystem = createParticles()
@@ -32,14 +43,15 @@ const Marketverse = () => {
     
 
     // Create text sprites
-    for (let i = 0; i < 200; i++) {
-        const x =  (Math.random() * 2 - 1)
-        const y =  (Math.random() * 2 - 1)
-        const z =  (Math.random() * 2 - 1)
-        const textSprite = createTextSprite("Hello",  x,  y, z);
 
-        scene.add(textSprite);
-    }
+    news.forEach(async(item) => {
+			const x =  (Math.random() * 2 - 1)
+      const y =  (item.sentiment * 2 - 1)
+      const z =  (Math.random() * 2 - 1)
+      const textSprite = createTextSprite(item.shortSummary.substring(0, 20),  x,  y, z);
+     
+      scene.add(textSprite);
+		});
 
     // Add lights
     const ambientLight = createAmbientLight();
@@ -118,11 +130,14 @@ const Marketverse = () => {
     // Clean up
     return () => {
       window.removeEventListener('keydown', () => {});
-      scene.remove(particleSystem);
-      scene.remove(...scene.children.filter((child) => child instanceof THREE.Sprite));
+      while(scene.children.length > 0){ 
+        scene.remove(scene.children[0]); 
+      }
+      const container = document.getElementById('three-container');
+      container ? (container as any).removeChild(renderer.domElement) : null;
       renderer.dispose();
     };
-  }, []);
+  }, [theme]);
 
   return <div id="three-container"/>;
 };

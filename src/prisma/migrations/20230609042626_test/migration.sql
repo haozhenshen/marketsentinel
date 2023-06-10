@@ -11,7 +11,7 @@ CREATE TABLE "Stock" (
 -- CreateTable
 CREATE TABLE "News" (
     "id" TEXT NOT NULL,
-    "time" BIGINT NOT NULL,
+    "time" TEXT NOT NULL,
     "headline" TEXT NOT NULL,
     "summary" TEXT NOT NULL,
     "shortSummary" TEXT NOT NULL,

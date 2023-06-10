@@ -33,7 +33,7 @@ function generateTextTexture(text, size) {
       }
 
 function createTextSprite(text, x, y, z) {
-    const distFactor = 80
+    const distFactor = 100
     // Create material for the text
     //const textMaterial = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(generateTextCanvas('Hello, World!a aaaaa', 40)) });
 
@@ -50,7 +50,7 @@ function createTextSprite(text, x, y, z) {
     const aspectRatio = textTexture.image.width / textTexture.image.height;
     const textHeight = textSize;
 
-    textSprite.scale.set(textSize, textSize/2, 1);
+    textSprite.scale.set(size * 3, textSize/2, 1);
 
 
     // Randomly position the text sprites in space
@@ -73,14 +73,14 @@ function createTextSprite(text, x, y, z) {
     }
 
     if (z < 0) {
-        const op = z <= 1 ? 0.7 - (Math.abs(z / distFactor) /2) : 0.7; 
+        const op = z <= 1 ? 0.99 - (Math.abs(z / distFactor) /2) : 0.99; 
         textSprite.material.opacity = op
     }
     else if (z > 0) {
-        const op = z >= 1 ? (Math.abs(z / distFactor) /2) + 0.7 : 0.7; 
-        textSprite.material.opacity = z / distFactor + 0.5;
+        const op = z >= 1 ? (Math.abs(z / distFactor) /2) + 0.99 : 0.99; 
+        textSprite.material.opacity = z / distFactor + 0.99;
     } else {
-        textSprite.material.opacity =  0.7;
+        textSprite.material.opacity =  0.99;
     }
     return textSprite;
 }

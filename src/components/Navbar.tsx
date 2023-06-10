@@ -16,18 +16,18 @@ const Navbar = async () => {
           MarketView
         </Link>
 
-        {/* <div className='md:hidden'>
+        <div className='md:hidden'>
           <ThemeToggle />
-        </div> */}
+        </div>
 
-        {/* <div className='hidden md:flex gap-4'>
+        <div className='hidden md:flex gap-4'>
           <ThemeToggle />
-          <Link
+          {/* <Link
             href='/documentation'
             className={buttonVariants({ variant: 'ghost' })}>
             Documentation
-          </Link>
-          {session ? (
+          </Link> */}
+          {/* {session ? (
             <>
               <Link
                 className={buttonVariants({ variant: 'ghost' })}
@@ -38,8 +38,8 @@ const Navbar = async () => {
             </>
           ) : (
             <SignInButton />
-          )}
-        </div> */}
+          )} */}
+        </div>
         
       </div>
     </div>

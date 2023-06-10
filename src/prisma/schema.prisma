@@ -22,7 +22,7 @@ model Stock {
 
 model News {
     id    String @id @default(cuid())
-    time  BigInt
+    time  String
     headline String
     summary String
     shortSummary String

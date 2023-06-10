@@ -17,7 +17,7 @@ async function main() {
 // 		price: 100,
 // 	}
 //   })
-//   console.log(stock)
+// 	console.log(stock)
 
 //   const deletenews = await prisma.news.deleteMany({
 	
@@ -30,7 +30,7 @@ async function main() {
 		data.forEach(async(item) => {
 			const news = await prisma.news.create({
 			data: {
-				time: item.datetime * 1000,
+				time: item.datetime.toString(),
 				headline: item.headline,
 				summary: item.summary,
 				shortSummary: item.summary,
@@ -38,7 +38,7 @@ async function main() {
 				source: item.source,
 				url: item.url,
 				stock: {
-					connect: { id: "clint3rw00000upc4d8dr5fio" }
+					connect: { id: "clio2fvc70000upo06giigq3s" }
 				}		
 				}
 			})
