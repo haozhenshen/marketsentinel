@@ -17,9 +17,13 @@ export default async function handler(
       /**
        * Search posts
        */
-      const stock: object| null = await prisma.stock.findUnique({
+      const stock: object| null = await prisma.stock.findFirst({
         where: {
-              ticker: query,
+              ticker: {
+                equals: query,
+                mode:'insensitive',
+              },
+              
         },
         select: {
           relatednews: true,
@@ -36,7 +40,7 @@ export default async function handler(
       // });
    
 
-      res.status(200).json({news: stock.relatednews});
+      res.status(200).json({stock});
     } catch (error: any) {
       console.log(error);
       res.status(500).end();

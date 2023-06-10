@@ -42,14 +42,14 @@ export default function Page() {
     return <Spinner />;
   }
 
-  if (!data.news) {
+  if (!data.stock) {
     return null;
   }
 
   
   return (
     <div className="relative flex items-center justify-center overflow-x-hidden">
-      <Marketverse news={data.news}/>
+      <Marketverse news={data.stock.relatednews}/>
     </div>
   );
 }
