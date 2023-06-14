@@ -27,7 +27,7 @@ export default function Page() {
 
 
   const { data, isLoading } = useSWR(
-    `/api/search?q=${encodedSearchQuery}`,
+    `/api/visual?q=${encodedSearchQuery}`,
     fetchPosts,
     { revalidateOnFocus: false }
   );

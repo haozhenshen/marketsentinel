@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const finnhub = require('finnhub');
 
 const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-api_key.apiKey = "chvrnnpr01qp0736ij20chvrnnpr01qp0736ij2g"
+api_key.apiKey = process.env.API_KEY;
 const finnhubClient = new finnhub.DefaultApi()
 
 
@@ -25,27 +25,27 @@ async function main() {
 //   console.log(deletenews)
 
 
-	finnhubClient.companyNews("AAPL", "2023-05-08", "2023-06-08", (error, data, response) => {
+	// finnhubClient.companyNews("AAPL", "2023-05-08", "2023-06-08", (error, data, response) => {
 	
-		data.forEach(async(item) => {
-			const news = await prisma.news.create({
-			data: {
-				time: item.datetime.toString(),
-				headline: item.headline,
-				summary: item.summary,
-				shortSummary: item.summary,
-				sentiment: Math.random(),
-				source: item.source,
-				url: item.url,
-				stock: {
-					connect: { id: "clio2fvc70000upo06giigq3s" }
-				}		
-				}
-			})
-			console.log(news)
+	// 	data.forEach(async(item) => {
+	// 		const news = await prisma.news.create({
+	// 		data: {
+	// 			time: item.datetime.toString(),
+	// 			headline: item.headline,
+	// 			summary: item.summary,
+	// 			shortSummary: item.summary,
+	// 			sentiment: Math.random(),
+	// 			source: item.source,
+	// 			url: item.url,
+	// 			stock: {
+	// 				connect: { id: "clio2fvc70000upo06giigq3s" }
+	// 			}		
+	// 			}
+	// 		})
+	// 		console.log(news)
 
-		});
-	});
+	// 	});
+	// });
 
 }
 
