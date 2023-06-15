@@ -11,7 +11,19 @@ import React, { FC, useEffect } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { useTheme } from 'next-themes';
-import { Stock, News } from '@prisma/client';
+
+interface News {
+  category: string;
+  datetime: number;
+  headline: string;
+  related: string;
+  source: string;
+  summary: string;
+  score: number;
+  url: string;
+  // ... add other properties as needed
+}
+
 
 interface MarketverseProps {
   news:  Array<News>;
@@ -46,9 +58,9 @@ const Marketverse: FC<MarketverseProps> = ({news}) => {
 
     news.forEach(async(item) => {
 			const x =  (Math.random() * 2 - 1)
-      const y =  (item.sentiment * 2 - 1)
+      const y =  item.score
       const z =  (Math.random() * 2 - 1)
-      const textSprite = createTextSprite(item.shortSummary.substring(0, 20),  x,  y, z);
+      const textSprite = createTextSprite(item.headline.substring(0, 100),  x,  y, z);
      
       scene.add(textSprite);
 		});

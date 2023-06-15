@@ -5,13 +5,14 @@ function generateTextTexture(text, size) {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
         const resolutionFactor = 3; // Increase canvas size for higher resolution
-        const fontSize = size * resolutionFactor; // Increase font size for higher resolution
+        const fontSize = 10 * resolutionFactor; // Increase font size for higher resolution
         const fontFamily = 'Arial';
       
         context.font = `${fontSize}px ${fontFamily}`;
       
         const textMetrics = context.measureText(text);
-        const textWidth = Math.max(textMetrics.width, 100);
+        
+        const textWidth = Math.max(textMetrics.width / 3, 100);
       
         const canvasWidth = textWidth * resolutionFactor;
         const canvasHeight = (fontSize * resolutionFactor); // Adjust canvas height based on font size
@@ -33,7 +34,7 @@ function generateTextTexture(text, size) {
       }
 
 function createTextSprite(text, x, y, z) {
-    const distFactor = 100
+    const distFactor = 300
     // Create material for the text
     //const textMaterial = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(generateTextCanvas('Hello, World!a aaaaa', 40)) });
 
@@ -50,7 +51,7 @@ function createTextSprite(text, x, y, z) {
     const aspectRatio = textTexture.image.width / textTexture.image.height;
     const textHeight = textSize;
 
-    textSprite.scale.set(size * 3, textSize/2, 1);
+    textSprite.scale.set(size * 3.5, textSize/2, 1);
 
 
     // Randomly position the text sprites in space

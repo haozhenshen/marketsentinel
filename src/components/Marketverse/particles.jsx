@@ -12,7 +12,7 @@ function createParticles() {
   for (let i = 0; i < particleCount; i++) {
     const index = i * 3;
 
-    const radius = Math.random() * 1000 + 300; // Random distance from the center
+    const radius = Math.random() * 1000 + 800; // Random distance from the center
 
     const u = Math.random();
     const v = Math.random();
