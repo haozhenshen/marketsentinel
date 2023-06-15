@@ -9,7 +9,7 @@ import Marketverse from '@/components/Marketverse/Marketverse'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'MarketView | Home',
+  title: 'MarketSentinel | Home',
   description: 'Free & open-source market sentiment visualization tool.',
 }
 
@@ -28,7 +28,7 @@ export default function Home() {
           </LargeHeading>
 
           <Paragraph className='lg:text-left'>
-            With MarketView, you can visualize
+            With MarketSentinel, you can visualize
             market sentiment at a glance.
           </Paragraph>
           
