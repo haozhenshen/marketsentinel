@@ -30,7 +30,7 @@ export default async function handler(
       let lastday =  `${yesterday.getFullYear()}-${yesterday.getMonth() + 1 < 10 ? '0' + (yesterday.getMonth() + 1) : yesterday.getMonth() + 1}-${yesterday.getDate()}`;
 
       const fetchCompanyNews = () =>
-        new Promise((resolve, reject) => {
+        new Promise<News[]>((resolve, reject) => {
           finnhubClient.companyNews(query.toUpperCase(), '2023-06-13', '2023-06-14', (error: any, data: News[], response: any) => {
             if (error) {
               reject(error);
@@ -43,7 +43,7 @@ export default async function handler(
 
       const getData = async () => {
         try {
-          const data = await fetchCompanyNews();
+          const data: News[] = await fetchCompanyNews();
           const payload = data;
           const modifiedpayload = data.map(async(newsObj: { summary: string; }) => ({
             ...newsObj,
