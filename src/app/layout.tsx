@@ -6,7 +6,7 @@ import { Inter } from 'next/font/google'
 import MobileMenu from '@/components/MobileMenu'
 import Providers from '@/components/Providers'
 import { cn } from '@/lib/utils'
-
+import dynamic from 'next/dynamic';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
@@ -14,20 +14,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
+  const ComponentWithNoSSR = dynamic(
+    () => import('@/components/Providers'),
+    { ssr: false }
+  );
+  
   return (
     <html
       lang='en'
       className={cn('bg-white text-slate-900 antialiased', inter.className)}>
       <body className='min-h-screen bg-slate-50 dark:bg-black antialiased'>
-        <Providers>
+        <ComponentWithNoSSR>
           {/* @ts-expect-error Server Component */}
           <Navbar />
           <Toaster position='bottom-right' />
 
-          <MobileMenu />
+          {/* <MobileMenu /> */}
 
           <main>{children}</main>
-        </Providers>
+        </ComponentWithNoSSR>
 
         {/* Allow more height for mobile menu on mobile */}
         <div className='h-40 md:hidden' />

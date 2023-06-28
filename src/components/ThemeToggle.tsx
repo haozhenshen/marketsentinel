@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useTheme } from 'next-themes'
-
+import { useEffect, useState } from 'react';
 import { Icons } from '@/components/Icons'
 import { Button } from '@/components/ui/Button'
 import {
@@ -14,7 +14,13 @@ import {
 
 export function ThemeToggle() {
   const { setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
+   // When mounted on client, now we can show the UI
+   useEffect(() => setMounted(true), [])
+
+   if (!mounted) return null;
+ 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
