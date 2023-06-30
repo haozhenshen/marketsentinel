@@ -1,6 +1,6 @@
 # Market Sentinel: A Market Sentiment Visualization Tool
 
-![Market Sentinel]([https://www.marketsentinel.ca])
+https://www.marketsentinel.ca/
 
 Welcome to the Market Sentiment Visualization Tool! This project aims to provide a comprehensive and intuitive tool for analyzing and visualizing market sentiment. By leveraging sentiment analysis techniques, this tool enables users to gain insights into the sentiment trends surrounding specific stocks and companies.
 
@@ -24,20 +24,20 @@ To set up the Market Sentiment Visualization Tool locally, follow these steps:
 
 ```shell
 git clone https://github.com/haozhenshen/marketsentinel.git
-
+```
 2. Navigate to the project directory:
 
 ```shell
 cd marketsentinel
-
+```
 3. Install the dependencies:
 
 ```shell
 npm install
-
+```
 4. Start the development server:
 
 ```shell
 npm run dev
-
+```
 5. Open your browser and visit http://localhost:3000 to access the Market Sentiment Visualization Tool.
